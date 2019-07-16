@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <script src="render.js"></script>
+        <script src="ui.js"></script>
+        <link rel="stylesheet" href="main.css">
+        
+        <title>Fractal</title>
+    </head>
+    <body>
+        <canvas id="mandelbrot"></canvas>
+
+        <div id="options">
+            <div id="options-toggle" onclick="UI.toggleHeight(this);" class="btn">
+                <span style="line-height: 1.5em; display: inline-block; height: 100%; font-weight: bold">Options</span>
+                <span class="material-icons rotating" style="line-height: 1.5em; float: right;">keyboard_arrow_left</span>
+            </div>
+            <div class="toggle-h">
+                <p>Resolution:</p>
+                <div class="slidecotainer">
+                    <input type="range" min="1" max="400" value="80" class="slider" oninput="UI.setSliderValue(this, 0.005);" onchange="setResolution(parseInt(this.value) / 100, false); asyncRender();">
+                    <p style="text-align: center"><span class="slideval">0.4</span> &times; pixels</p>
+                </div>
+
+                <label class="checkbox-container">
+                    Motion Blur
+                    <input type="checkbox" checked oninput="motionBlur = this.checked">
+                    <span class="checkmark"></span>
+                </label>
+
+                <p>Zoom Speed:</p>
+                <div class="slidecotainer">
+                    <input type="range" min="1" max="500" value="100" class="slider" oninput="UI.setSliderValue(this, 0.01);" onchange="baseTransformation.zoomSpeed = parseInt(this.value) / 100">
+                    <p style="text-align: center"><span class="slideval">1</span></p>
+                </div>
+                <hr />
+                <p>Max Iterations:</p>
+                <div class="slidecotainer">
+                    <input type="range" min="10" max="2000" value="30" class="slider" oninput="UI.setSliderValue(this, 1);" onchange="maxIterations = parseInt(this.value); asyncRender();">
+                    <p style="text-align: center"><span class="slideval">30</span> iterations</p>
+                </div>
+                <hr />
+                <p>Contrast:</p>
+                <div class="slidecotainer">
+                    <input type="range" min="-255" max="255" value="0" class="slider" oninput="UI.setSliderValue(this, 1);" onchange="color.contrast = parseInt(this.value); asyncRender();">
+                    <p style="text-align: center"><span class="slideval">0</span></p>
+                </div>
+                <p>Brightness:</p>
+                <div class="slidecotainer">
+                    <input type="range" min="-255" max="255" value="0" class="slider" oninput="UI.setSliderValue(this, 1);" onchange="color.brightness = parseInt(this.value); asyncRender();">
+                    <p style="text-align: center"><span class="slideval">0</span></p>
+                </div>
+                <hr />
+                <div class="choose">
+                    <div class="option selected" onclick="fractalType = UI.updateChoice(this); asyncRender();">Mandelbrot Set</div>
+                    <div class="option" onclick="fractalType = UI.updateChoice(this); asyncRender();" toggle="#cxcy">Julia Set</div>
+                    <div class="option" onclick="fractalType = UI.updateChoice(this); asyncRender();" toggle="#cxcy,#n">Julia Set (N type)</div>
+                </div>
+                <div id="cxcy" class="hide">
+                    <hr />
+                    <p>CX:</p>
+                    <div class="slidecotainer">
+                        <input type="range" min="-10000" max="10000" value="-7000" class="slider" oninput="UI.setSliderValue(this, 0.0001, 10000);" onchange="cx = parseInt(this.value) * 0.0001; asyncRender();">
+                        <p style="text-align: center"><span class="slideval">-0.7</span></p>
+                    </div>
+                    <p>CY:</p>
+                    <div class="slidecotainer">
+                        <input type="range" min="-100000" max="100000" value="27015" class="slider" oninput="UI.setSliderValue(this, 0.00001, 10000);" onchange="cy = parseInt(this.value) * 0.00001; asyncRender();">
+                        <p style="text-align: center"><span class="slideval">0.27015</span></p>
+                    </div>
+                </div>
+                <div id="n" class="hide">
+                    <p>N:</p>
+                    <div class="slidecotainer">
+                        <input type="range" min="1" max="100" value="2" class="slider" oninput="UI.setSliderValue(this, 1);" onchange="n = parseInt(this.value); asyncRender();">
+                        <p style="text-align: center"><span class="slideval">2</span></p>
+                    </div>
+                </div>
+                <hr />
+                <div style="width: 100%; text-align: center; padding-bottom: 0.5em">
+                    <div class="button" onclick="takeImage();">Take Image (WIP)</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="working" class="material-icons">
+            cached
+        </div>
+    </body>
+    <script src="main.js"></script>
+</html>

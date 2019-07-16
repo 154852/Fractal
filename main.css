@@ -1,0 +1,316 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#options {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    background-color: white;
+    border-radius: 0.4em;
+    box-shadow: lightgray 0 0 10px 0;
+    padding: 0.3em 1em;
+    width: 25em;
+    max-height: calc(100vh - 2em);
+    /* overflow-y: scroll; */
+    /* min-height: 1.5em; */
+}
+
+#options .toggle-h.height-down {
+    overflow-y: scroll;
+    max-height: calc(100vh - 3em);
+}
+
+
+#options-toggle {
+    height: 1.5em;
+}
+
+.material-icons {
+    line-height: 100%;
+    vertical-align: middle;
+    font-size: inherit;
+}
+
+.toggle-h {
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    -webkit-transition: max-height 0.2s ease-out;
+    -moz-transition: max-height 0.2s ease-out;
+    -ms-transition: max-height 0.2s ease-out;
+    -o-transition: max-height 0.2s ease-out;
+    overflow-y: hidden;
+}
+
+.toggle-h:not(.height-down) {
+    overflow: hidden;
+}
+
+.toggle-h.height-down {
+    max-height: 100vh;
+    transition: max-height 0.2s ease-in;
+    -webkit-transition: max-height 0.2s ease-in;
+    -moz-transition: max-height 0.2s ease-in;
+    -ms-transition: max-height 0.2s ease-in;
+    -o-transition: max-height 0.2s ease-in;
+}
+
+.rotating.height-rotate {
+    transform: rotate(-0.25turn);
+    -webkit-transform: rotate(-0.25turn);
+    -moz-transform: rotate(-0.25turn);
+    -ms-transform: rotate(-0.25turn);
+    -o-transform: rotate(-0.25turn);
+}
+
+.btn {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+}
+
+hr {
+    background-color: lightgray;
+    height: 1px;
+    border: none;
+    width: 80%;
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 7px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 0;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgb(36, 36, 36);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgb(36, 36, 36);
+    cursor: pointer;
+}
+
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: black;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.button {
+    color: black;
+    border: solid black 1px;
+    padding: 0.5em 3em;
+    display: inline-block;
+    margin: 0.2em auto;
+
+    cursor: pointer;
+    position: relative;
+
+    transition: color 0.2s linear;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 20%;
+    height: 20%;
+    background-color: white;
+    z-index: -1;
+
+    transition: 0.03s linear;
+}
+
+.button:hover {
+    color: white;
+}
+
+.button:hover::before {
+    background-color: black;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+#working {
+    position: fixed;
+    top: 0.3em;
+    right: 0.3em;
+    font-size: 150%;
+    display: none;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0turn);
+        -webkit-transform: rotate(0turn);
+        -moz-transform: rotate(0turn);
+        -ms-transform: rotate(0turn);
+        -o-transform: rotate(0turn);
+    }
+
+    50% {
+        transform: rotate(0.5turn);
+        -webkit-transform: rotate(0.5turn);
+        -moz-transform: rotate(0.5turn);
+        -ms-transform: rotate(0.5turn);
+        -o-transform: rotate(0.5turn);
+    }
+
+    100% {
+        transform: rotate(1turn);
+        -webkit-transform: rotate(1turn);
+        -moz-transform: rotate(1turn);
+        -ms-transform: rotate(1turn);
+        -o-transform: rotate(1turn);
+    }
+}
+
+#working.spin {
+    display: block;
+
+    animation: rotate 1.5s;
+    animation-iteration-count: infinite;
+
+    -webkit-animation: rotate 1.5s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+.choose {
+    border: solid black 1px;
+    border-bottom-width: 0;
+}
+
+.choose .selected {
+    color: white;
+    background-color: black;
+    position: relative;
+}
+
+.choose .selected::after {
+    content: 'keyboard_arrow_left';
+    font-family: 'Material Icons';
+    -webkit-font-smoothing: antialiased;
+
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.choose:hover .selected::after {
+    display: none;
+}
+
+.choose .option {
+    border-bottom: solid black 1px;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    box-sizing: border-box;
+}
+
+.choose:not(:hover) .option:not(.selected) {
+    display: none;
+}
+
+.choose .option:hover:not(.selected) {
+    background-color: rgb(235, 235, 235);
+}
