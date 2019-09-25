@@ -15,7 +15,7 @@ A static fractal exploration application, visible [here](https://fractal.thunder
 ## The fractals
 
 The Mandelbrot set: https://en.wikipedia.org/wiki/Mandelbrot_set
-Code at (render.js:18)(https://github.com/154852/Fractal/blob/80c809f29f684454bdfea60ac562df550d6945e9/render.js#L18)
+Code at [render.js:18](https://github.com/154852/Fractal/blob/80c809f29f684454bdfea60ac562df550d6945e9/render.js#L18)
 
 The Julia set: https://en.wikipedia.org/wiki/Julia_Set
 Code at [render.js:71](https://github.com/154852/Fractal/blob/80c809f29f684454bdfea60ac562df550d6945e9/render.js#L71) for the normal, simple version, and [render.js:127](https://github.com/154852/Fractal/blob/80c809f29f684454bdfea60ac562df550d6945e9/render.js#L127) for the N-type version.
